@@ -56,7 +56,7 @@ export default function Haxidraw({ stars }) {
             <Buttons
               id="54"
               icon="slack"
-              link="https://slack.hackclub.com"
+              link="/slack"
               overrideColor="rgba(255, 255, 255, 0.7)"
               sx={{ color: 'black' }}
             >

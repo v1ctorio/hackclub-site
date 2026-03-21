@@ -153,7 +153,7 @@ const recapPixels = [
   0xffffffff, 0xffffffff
 ]
 
-const slackLink = 'https://slack.hackclub.com'
+const slackLink = '/slack/?event=onboard'
 
 const stickerButtonText = 'Click 4 Stickers'
 const stickerButtonFont = 'Oleo Script'

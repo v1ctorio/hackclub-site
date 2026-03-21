@@ -242,7 +242,7 @@ const Page = () => (
             to bring the community together. Let's take a trip down memory lane.
           </Heading>
           <Link
-            href="https://slack.hackclub.com"
+            href="https://hackclub.com/slack"
             target="_blank"
             rel="noopener"
             sx={{ textDecoration: 'none' }}

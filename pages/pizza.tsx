@@ -439,7 +439,7 @@ const PizzaPage = () => {
               to a space for Hack Club leaders to ask questions & chat, share
               projects, & attend events.
             </Text>
-            <Link href="https://slack.hackclub.com">
+            <Link href="/slack">
               <Button
                 sx={{
                   marginTop: 16,

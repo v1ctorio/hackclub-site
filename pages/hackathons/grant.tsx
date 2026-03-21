@@ -327,7 +327,7 @@ const HackathonGrant = () => {
                 </Link>{' '}
                 or ask in{' '}
                 <Link
-                  href="https://slack.hackclub.com"
+                  href="/slack"
                   target="_blank"
                   sx={{
                     color: 'muted'

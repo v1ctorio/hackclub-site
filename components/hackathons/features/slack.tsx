@@ -58,7 +58,7 @@ const Content = () => (
       own hackathon organizing experiences—from finding a venue to securing
       sponsorships to ordering food.
     </Text>
-    <NextLink href="https://slack.hackclub.com">
+    <NextLink href="/slack">
       <Button
         variant="ctaLg"
         sx={{

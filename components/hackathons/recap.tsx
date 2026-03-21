@@ -51,7 +51,7 @@ export default function Recap() {
         <Card
           variant="interactive"
           as="a"
-          href="https://slack.hackclub.com"
+          href="/slack"
           sx={{
             background: 'linear-gradient(-32deg, #6f31b7 14%, #fb558e 82%)',
             color: 'white',
