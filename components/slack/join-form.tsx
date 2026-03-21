@@ -15,7 +15,12 @@ import useForm from '../../lib/use-form'
 import Submit from '../submit'
 
 import { withRouter } from 'next/router'
-
+interface Fields {
+  first_name?: string;
+  last_name?: string;
+  email?: string;
+  reason?: string;
+}
 const JoinForm = ({ sx = {}, router }) => {
   const useWaitlist = process.env.NEXT_PUBLIC_OPEN !== 'true'
 
@@ -31,14 +36,27 @@ const JoinForm = ({ sx = {}, router }) => {
       }
       : { reason: router.query.reason, event: router.query.event }
   })
+  const typedData = data as Fields
 
   const eventReferrer = (data as any).event
 
   const isAdult = (data as any).year === 'tertiary'
+  const couldBeUnder13 = (data as any).year === "middle"
+  
   
   return (
     <Card sx={{ maxWidth: 'narrow', mx: 'auto', '& label': { mb: 3 }, ...sx }}>
-      <form {...formProps}>
+      <form {...formProps}
+      onSubmit={event=>{
+        const params = new URLSearchParams({
+          "first_name": typedData.first_name,
+          "last_name": typedData.last_name,
+          "email": typedData.email
+        }).toString()
+        event.preventDefault()
+        window.location.assign("https://auth.hackclub.com/slack?"+params)
+      }}
+      >
         {eventReferrer && (
           <Box
             sx={{
@@ -62,15 +80,24 @@ const JoinForm = ({ sx = {}, router }) => {
             </Text>
           </Box>
         )}
-        <Grid columns={[1, 3]} gap={1} sx={{ columnGap: 2 }}>
+        <Grid columns={[2, 2]} gap={1} sx={{ columnGap: 2 }}>
           <Label>
-            Full name
+            First name
             <Input
-              {...useField('name')}
-              placeholder="Fiona Hackworth"
+              {...useField('first_name')}
+              placeholder="Fiona"
               required
-              id="joiner_full_name"
+              id="joiner_first_name"
             />
+          </Label>
+          <Label>
+            Last name
+            <Input
+            {...useField('last_name')}
+            placeholder='Hackworth'
+            required
+            id='joiner_last_name'/>
+              
           </Label>
           <Label sx={{ width: '100%' }}>
             Email address
@@ -104,19 +131,28 @@ const JoinForm = ({ sx = {}, router }) => {
             required
           />
         </Label>
+        {couldBeUnder13 && (
+          <Text
+            variant="caption"
+            color="secondary"
+            as="div"
+            sx={{ maxWidth: '600px', textAlign: 'left', mb: 2 }}
+          >
+            Heads up, Hack Club is <b>only for teenagers over 13</b>.<br/>
+            If you're under 13, we'll be waiting for you on your birthday!
+          </Text>
+        )}
+
         {isAdult && (
           <Text
             variant="caption"
             color="secondary"
             as="div"
-            sx={{ maxWidth: '600px', textAlign: 'center', mb: 2 }}
+            sx={{ maxWidth: '600px', textAlign: 'left', mb: 2 }}
           >
-            Hold your horses! <b>Our Slack community is for minors</b>! To find
-            out more about what all we do, check out our{' '}
-            <Link href="https://github.com/hackclub"> Github </Link>. If you're
-            a parent or educator & want to talk to a member of our team, send us
-            a email at{' '}
-            <Link href="mailto:team@hackclub.com">team@hackclub.com</Link>.
+            Hold your horses! <b>Our Slack community is for minors</b>! You can still participate in our referral program, {" "}
+            <Link href='https://pyramid.hackclub.com/' sx={{whiteSpace: "nowrap"}}>Pyramid Scheme</Link>. Or check out our partner organization, {" "}
+            <Link href='https://education.github.com/' sx={{whiteSpace: "nowrap"}}>GitHub Education</Link>).
           </Text>
         )}
         <Box>
